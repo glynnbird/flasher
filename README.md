@@ -26,7 +26,11 @@ You'll need an LED and a resistor
 * ms - the number of milliseconds to flash for (default 50)
 * usage - print the usage information
 
+e.g.
+
     tail -f /var/log/messages | sudo node flasher.js --pin 11 --ms 100
+
+
 
 
   
