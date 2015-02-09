@@ -49,24 +49,38 @@ gpio.setup(LED, gpio.DIR_OUT, function() {
     if (err)
       throw err;
 
-    // listen to stdin
-    var rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    });
-
-    // when a line is received 
-    rl.on("line", function(line) {
-      // and the led is off
-      if (currentState == false) {
+    // if in oneoff mode
+    if (argv.oneoff) {
+      
+      // flash once
+      flash( function(err,data) {
         
-        // start a flashing cycle
-        currentState = true;
-        flash( function(err,data) {
-          currentState=false;
-        });
-      }
-    });
+        // and die
+        process.exit();
+      });
+      
+    } else {
+      
+      // listen to stdin
+      var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+
+      // when a line is received 
+      rl.on("line", function(line) {
+        // and the led is off
+        if (currentState == false) {
+        
+          // start a flashing cycle
+          currentState = true;
+          flash( function(err,data) {
+            currentState=false;
+          });
+        }
+      });
+    }
+
 
     
   });
