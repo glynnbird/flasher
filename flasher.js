@@ -7,7 +7,9 @@ if(argv.help) {
   console.log("Usage: node flasher.js --led 11 --ms 50");
   console.log(" led - the pin number to flash (default 11)");
   console.log(" ms  - the number of ms to flash on for (default 50)");
+  console.log(" oneoff - whether to do one flash and die (default false)")
   console.log("Example usage: tail -f /var/log/messages | sudo node flasher.js");
+  console.log("               sudo node flasher --oneoff true --ms 1000");
   process.exit();    
 }
 
